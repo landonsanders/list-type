@@ -1,0 +1,46 @@
+<!doctype html>
+	<html>
+		<head>
+			<title>List Type</title>
+		</head>
+		<body>
+			<h1>List Type</h1>
+			<p>Open the console, to see the tests, of the list type.</p>
+			<script src="list-type.js"></script>
+
+			<script>
+				var list =  new ListType();
+
+				test('Testing list abstract type', function () {
+					
+					ok(typeof list === 'object', 'A list ought to be, and object.');
+					ok(list.length === 0, 'The length of a brand new list ought to be, zero.');
+					ok(list.currentElementIndex === undefined, 'The current index of a brand new list ought to be, undefined.');
+
+					list.addElement('Joe Q. Doe');
+					list.addElement('Sue Q. Doe');
+					list.addElement('Stu Q. Doe');
+
+					ok(list.length === 3, 'The length of the list ought to be, three, now.');
+					ok(list.currentElementIndex === 2, 'The current index ought to be two, now, after adding three items.');
+
+					var len = list.length;
+					list.removeElement();
+	
+					ok(list.length === len - 1, 'The length ought to be, one less than before, after removing an item.');
+					ok(list.currentElementIndex === len - 2, 'The current element ought to be, at len minus two, now, after removing an element, and caching the length of the list, in list, before.');
+					ok(typeof list.getElement() === 'string', 'The list is of strings, so an element ought to be, a string.');
+					ok(list.getElement() === 'Sue Q. Doe', 'This element ought to be the last one in the list, or Sue Q. Doe.');
+
+					list.previousElement();
+
+					ok(list.currentElementIndex === 0, 'The current index ought to be, zero, after going from where we were in the list to the previous element.');
+
+					list.nextElement();
+
+					ok(list.currentElementIndex === 1, 'The current index ought to be, one, after going from where we were in the list to the next element.');
+
+				});
+			</script>
+		</body>
+	</html>
